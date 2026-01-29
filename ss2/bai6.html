@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quan ly muon sach</title>
+</head>
+<body>
+<script>
+  
+  let bookName = prompt("Nhập tên sách:");
+  let borrowerName = prompt("Nhập tên người mượn:");
+  let bookStatus = prompt("Nhập tình trạng sách (available / borrowed / unavailable):");
+  let daysBorrow = +prompt("Nhập số ngày mượn:");
+  let hasCard = prompt("Bạn có thẻ thư viện không? (yes/no):");
+
+  
+  let libraryCard = (hasCard === "yes");
+
+  
+  if (bookStatus === "available" && libraryCard) {
+    console.log("Chúc mừng, bạn có thể mượn sách này");
+
+  } else if (bookStatus === "borrowed" && daysBorrow < 30) {
+
+    if (libraryCard) {
+      console.log("Sách đang được mượn, vui lòng đợi đến khi trả lại");
+    } else {
+      console.log("Bạn không thể mượn sách nếu không có thẻ thư viện");
+    }
+
+  } else if (bookStatus === "unavailable") {
+    console.log("Sách này hiện tại không có sẵn trong thư viện, bạn có thể đăng ký mượn sau");
+
+  } else {
+    console.log("Thông tin không hợp lệ, vui lòng nhập lại");
+  }
+</script>
+</body>
+</html>

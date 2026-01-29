@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let bookName = prompt("Nhập tên sách: ");
+        let year = prompt("Nhập năm xuất bản");
+        let statusBook = prompt("tình trạng sách :có sẵn hay đã mượn");
+       
+            if ( statusBook == "có sẵn" && 2026 - year < 5) {
+                console.log("Sách này mới và có sẵn để mượn");
+            } else if (statusBook == "đã mượn" && 2026 - year < 10) {
+                console.log("Sách này đã mượn nhưng khá mới, có thể mượn lại sau");
+            }
+         else if (statusBook == "đã mượn" && 2026 - year > 10) {
+        console.log("Sách này đã mượn và khá cũ")
+        } else if (statusBook == "có sẵn" && 2026 - year > 5) {
+               console.log("Sách này có sẵn nhưng đã lâu năm");
+        }
+
+    </script>
+</body>
+</html>

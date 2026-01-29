@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nameBook =prompt("Nhập tên sách: ");
+        let nameAuthor = prompt("Nhập tên tác giả: ");
+        let year = +prompt("Nhập năm xuất bản: ");
+        if( year == 2026) {
+            console.log("Đây là sách mới");
+
+        } else if ( 2026 - year == 5 ) {
+            console.log("Sách khá mới");
+        } else {
+            console.log ('Sách đã cũ');
+        }
+    </script>
+</body>
+</html>

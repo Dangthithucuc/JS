@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nameBook = prompt("Nhập tên sách: ");
+        let userName = prompt("Tên người mượn: ");
+        let favorite = +prompt("Nhập từ 1 - 5:");
+        switch (favorite) {
+            case 5:
+            case 4:
+            console.log("Đây là cuốn sách yêu thích của bạn,hãy đọc ngay!")
+            break;
+            case 3:
+            console.log("Sách này khá ổn, có thể mượn")
+            break;
+            case 2 :
+            case 1:
+                console.log("Sách này bạn có thể cân nhắc mượn lại sau")
+        }
+    </script>
+</body>
+</html>
