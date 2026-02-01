@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let count = 0;
+        let printf = "không"
+       while (1) {
+        
+        
+        let answer = prompt("Có yêu cầu gia hạn mới không? (có/không)");
+        if (answer == "có") {
+            let userName = prompt("Tên bạn đọc:");
+            let nameBook = prompt("Tên sách: ");
+            let daysBorrowed = +prompt("Số ngày mượn hiện tại(>=1)");
+            let extendDays = +prompt("Số ngày muốn gia hạn thêm");
+            if (daysBorrowed + extendDays > 60) {
+               printf = "Không được gia hạn: Tổng thời gian vượt quá 60 ngày tối đa"
+            } else if (daysBorrowed > 45) {
+                 printf = "Không được gia hạn: Đã mượn quá lâu (>45 ngày)"
+            } else if (daysBorrowed + extendDays <= 30){ 
+                printf = "Gia hạn thành công";
+                count++;
+            }
+        } else if (answer == "không") {
+            
+            break;
+           
+            
+        }
+       }
+        console.log(printf);
+            
+            console.log(count);
+    </script>
+</body>
+</html>

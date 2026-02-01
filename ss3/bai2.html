@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+           let n = +prompt("Hôm nay có bao nhiêu lượt trả sách");
+       let result ="";
+       let count = 0;
+
+        for ( let i = 0; i < n; i++) {
+            let userName = prompt("Tên người trả");
+            let nameBook = prompt("Tên sách: ");
+            let daysReturn = +prompt("Số ngày mượn (>1)");
+            if (days > 14) {
+                 result =  "Thời gian mượn vượt quy định (tối đa 14 ngày";
+            } else if (daysBorrow <= 14) {
+                 result ="Mượn thành công";
+                 count++;
+            }
+        }
+        console.log( result );
+        console.log("Tổng số lần mượn",count);
+    </script>
+</body>
+</html>
