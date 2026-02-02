@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library System</title>
+</head>
+<body>
+<script>
+
+let count = 0;
+let number = 3;
+let isLogin = false;
+
+while (1) {
+    let account = prompt("Tên tài khoản:");
+    let password = prompt("Mật khẩu:");
+    let result = "";
+
+    if (account === "admin" && password === "12345") {
+        alert("Đăng nhập thành công!");
+        isLogin = true;
+        break;
+    } else {
+        if (account !== "admin" && password !== "12345") {
+            result = "Sai cả tài khoản và mật khẩu!";
+        } else if (account !== "admin") {
+            result = "Tài khoản sai!";
+        } else {
+            result = "Mật khẩu sai!";
+        }
+
+        count++;
+        number--;
+        alert(`${result} Bạn còn ${number} lần`);
+
+        if (count === 3) {
+            alert("Tài khoản đã bị khóa");
+            break;
+        }
+    }
+}
+
+if (!isLogin) {
+    document.write("Kết thúc chương trình");
+} else {
+
+    
+    let choice;
+    do {
+        choice = +prompt(`
+----------------- MENU -----------------
+1. Phân loại mã số sách
+2. Thiết kế sơ đồ kho sách
+3. Dự toán phí bảo trì
+4. Tìm mã số sách may mắn
+5. Thoát
+`);
+
+        switch (choice) {
+
+            
+            case 1:
+                alert("Nhập mã sách (0 để dừng)");
+                let total = 0;
+                let even = 0;
+                let odd = 0;
+
+                while (1) {
+                    let bookId = +prompt("Nhập mã số sách:");
+                    if (bookId === 0) break;
+
+                    total++;
+                    if (bookId % 2 === 0) {
+                        even++;
+                    } else {
+                        odd++;
+                    }
+                }
+
+                alert(
+                    `Tổng mã sách: ${total}
+Sách khoa học (chẵn): ${even}
+Sách nghệ thuật (lẻ): ${odd}`
+                );
+                break;
+
+           
+            case 2:
+                let rows = +prompt("Nhập số hàng:");
+                let cols = +prompt("Nhập số cột:");
+
+                document.write("<h3>Sơ đồ kho sách</h3>");
+                for (let i = 1; i <= rows; i++) {
+                    for (let j = 1; j <= cols; j++) {
+                        if (i === j) {
+                            document.write(`[${i}-${j}] (Kệ ưu tiên) `);
+                        } else {
+                            document.write(`[${i}-${j}] `);
+                        }
+                    }
+                    document.write("<br>");
+                }
+                break;
+
+           
+            case 3:
+                let bookCount = +prompt("Nhập số lượng sách:");
+                let cost = +prompt("Nhập phí bảo trì 1 cuốn:");
+                let years = +prompt("Nhập số năm:");
+
+                document.write("<h3>Bảng phí bảo trì</h3>");
+                for (let year = 1; year <= years; year++) {
+                    let totalCost = bookCount * cost;
+                    document.write(
+                        `Năm ${year}: ${totalCost.toLocaleString("vi-VN")} đ<br>`
+                    );
+                    cost *= 1.1;
+                }
+                break;
+
+            
+            case 4:
+                let N = +prompt("Nhập N:");
+                let luckyCount = 0;
+
+                document.write("<h3>Mã sách may mắn</h3>");
+                for (let i = 1; i <= N; i++) {
+                    if (i % 3 === 0 && i % 5 !== 0) {
+                        document.write(i + " ");
+                        luckyCount++;
+                    }
+                }
+                document.write("<br>Tổng số mã may mắn: " + luckyCount);
+                break;
+
+            case 5:
+                alert("Hệ thống đang đăng xuất...");
+                break;
+
+            default:
+                alert("Lựa chọn không hợp lệ!");
+        }
+
+    } while (choice !== 5);
+}
+</script>
+</body>
+</html>
