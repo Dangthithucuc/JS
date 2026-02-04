@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý thư viện</title>
+</head>
+<body>
+<script>
+   
+    let books = ["Nha Gia Kim", "Dac Nhan Tam", "Tuan Lam Viec 4 Gio"];
+
+    while (true) {
+        let choice = prompt(
+`--- THƯ VIỆN KHOA HỌC ---
+1. Xem danh sách
+2. Nhập sách mới
+3. Mượn sách (Xóa)
+4. Sửa tên sách
+5. Sắp xếp kệ
+0. Thoát
+
+Bạn chọn:`);
+
+        switch (choice) {
+           
+            case "1":
+                console.log(`Danh sách hiện tại (${books.length} cuốn):`);
+                for (let i = 0; i < books.length; i++) {
+                    console.log(`${i + 1}. ${books[i]}`);
+                }
+                break;
+
+            
+            case "2":
+                let newBook = prompt("Nhập tên sách mới:");
+                if (newBook && newBook.trim() !== "") {
+                    books.push(newBook.trim());
+                    console.log("Đã thêm thành công!");
+                } else {
+                    console.log("Tên sách không hợp lệ!");
+                }
+                break;
+
+           
+            case "3":
+                let borrowBook = prompt("Nhập tên sách muốn mượn:");
+                let indexBorrow = books.indexOf(borrowBook);
+
+                if (indexBorrow === -1) {
+                    console.log(`Lỗi: Không tìm thấy sách ${borrowBook}!`);
+                } else {
+                    books.splice(indexBorrow, 1);
+                    console.log(`Đã cho mượn cuốn '${borrowBook}'.`);
+                }
+                break;
+
+            case "4":
+                let oldName = prompt("Nhập tên sách cũ cần sửa:");
+                let indexEdit = books.indexOf(oldName);
+
+                if (indexEdit === -1) {
+                    console.log("Không tìm thấy sách cần sửa!");
+                } else {
+                    let newName = prompt("Nhập tên sách mới:");
+                    if (newName && newName.trim() !== "") {
+                        books[indexEdit] = newName.trim();
+                        console.log("Cập nhật tên sách thành công!");
+                    } else {
+                        console.log("Tên sách mới không hợp lệ!");
+                    }
+                }
+                break;
+
+           
+            case "5":
+                books.sort();
+                console.log("Danh sách sau khi sắp xếp:");
+                for (let i = 0; i < books.length; i++) {
+                    console.log(`${i + 1}. ${books[i]}`);
+                }
+                break;
+
+            case "0":
+                console.log("Thoát chương trình!");
+                break;
+
+            default:
+                console.log("Lựa chọn không hợp lệ!");
+        }
+
+        if (choice === "0") {
+            break;
+        }
+    }
+</script>
+</body>
+</html>
