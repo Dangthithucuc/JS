@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    const squad = [
+    ["Nguyen Van A", 10, "FW"],
+
+    ["Tran Van B", 5, "MF"],
+
+    ["Le Van C", 2, "DF"],
+
+    ["Pham Van D", 12, "FW"],
+
+    ["Hoang Van E", 0, "GK"],
+
+    ["Dang Van F", 7, "MF"]
+    ]
+    let choice;
+    do {
+         choice = +prompt(`
+        --- QUẢN LÝ ĐỘI BÓNG ---
+
+1. Xem danh sách
+
+2. Tìm kiếm (Find)
+
+3. Lọc vị trí (Filter)
+
+4. Tổng bàn thắng (Reduce)
+
+5. Kiểm tra hiệu suất (Some/Every)
+
+0. Thoát
+        `)
+         switch(choice) {
+        case 1 :
+            squad.forEach((element,index) => {
+                console.log(element)
+            })
+            break;
+        case 2 :
+            let name = squad.find(prompt("Nhập tên cầu thủ cần tìm"));
+            break;
+        }
+    } while (choice !== 0 )
+   
+    
+   </script> 
+</body>
+</html>

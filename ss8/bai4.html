@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const players = [
+    "Messi - Forward - 25",
+    "Ronaldo - Forward - 30",
+    "Neymar - Forward - 18",
+    "De Bruyne - Midfielder - 8",
+    "Kante - Midfielder - 2",
+    "Van Dijk - Defender - 5",
+    "Alisson - Goalkeeper - 0"
+];
+
+getReversedNames(players);
+function getReversedNames(players) {
+    const names = [];
+
+    // Lấy tên (phần trước " - ")
+    for (let i = 0; i < players.length; i++) {
+        const name = players[i].split(" - ")[0];
+        names.push(name);
+    }
+
+    // Đảo ngược thứ tự (không làm ảnh hưởng mảng gốc)
+    const reversedNames = [];
+    for (let i = names.length - 1; i >= 0; i--) {
+        reversedNames.push(names[i]);
+    }
+
+    return reversedNames;
+}
+    </script>
+</body>
+</html>
