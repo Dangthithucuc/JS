@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+    function analyzeSalary(minYears, teamPlayers) {
+
+    const filtered = teamPlayers.filter(p => p.years >= minYears);
+
+    if (filtered.length === 0) {
+        return {
+            totalSalary: 0,
+            highestPaid: null,
+            lowestPaid: null
+        };
+    }
+
+    return filtered.reduce((acc, player) => {
+        acc.totalSalary += player.salary;
+
+        if (!acc.highestPaid || player.salary > acc.highestPaid.salary) {
+            acc.highestPaid = player;
+        }
+
+        if (!acc.lowestPaid || player.salary < acc.lowestPaid.salary) {
+            acc.lowestPaid = player;
+        }
+
+        return acc;
+    }, {
+        totalSalary: 0,
+        highestPaid: null,
+        lowestPaid: null
+    });
+}
+</script>
+</body>
+</html>

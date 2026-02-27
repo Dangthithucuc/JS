@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let students = [
+             {
+            id: 1,
+            name: "Thu Cúc",
+            age: "18",
+            gpa: "4.0",
+            status: "active"
+        }
+        ]
+        
+          
+        function createStudent (students ) {
+            let id = prompt("Nhập id:")
+            let name = prompt("Nhập tên:")
+            let age = prompt("Nhập age:")
+            let gpa = prompt("Nhập gpa:")
+            let status = prompt("Nhập trạng thái")
+              let student2 = {
+            id: id,
+            name: name,
+            age: age,
+            gpa: gpa,
+            status: status
+        }
+        students.push(student2)
+        console.log(students);
+        
+        }
+        createStudent(students);
+       // ===== 3. FILTER SCHOLARSHIP CANDIDATES =====
+             function filterScholarship() {
+  const candidates = students.filter((s) => s.gpa > 8.0);
+  alert(formatList(candidates, "===== SCHOLARSHIP CANDIDATES (GPA > 8.0) ====="));
+}
+filterScholarship();
+    </script>
+</body>
+</html>

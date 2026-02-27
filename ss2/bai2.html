@@ -7,17 +7,23 @@
 </head>
 <body>
     <script>
-        let quantityBook = prompt("Nhập số lượng sách: ");
-        if (quantityBook < 10 ) {
-            console.log('Thư viện có ít sách');
+    let quantity = +prompt("Nhập số lượng sách: ");
+    if(isNaN(quantity) || quantity < 0){
+        console.log("Không hợp lệ");
+        
+    }
+    else if (quantity < 10) {
+        console.log("Thư viện có ít sách");
+        
+    } else if (quantity <= 20) {
+        console.log("Thư viện có số lượng sách vừa đủ");
+        
+    } else {
+        console.log("Thư viện có nhiều sách");
+        
+    }
 
-        } else if (quantityBook < 20) {
-            console.log("Thư viện có số lượng sách vừa đủ");
-
-        } else if (quantityBook > 20) {
-            console.log("Thư viện có nhiều sách")
-
-        }
+    
     </script>
 </body>
 </html>1516

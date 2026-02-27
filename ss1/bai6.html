@@ -7,14 +7,11 @@
 </head>
 <body>
     <script>
-      let tenSach = prompt("Nhập tên sách:");
-      let soThuTu = prompt("Nhập số thứ tự của sách:");
-      let tenSachChuan = tenSach.trim();
-      tenSachChuan = tenSachChuan.toUpperCase();
-      let maSach = "LIB- " + tenSachChuan + " - " + soThuTu;
-      console.log("Tên sách gốc: " + tenSach);
-      console.log("Mã sách sau chuẩn hóa: " + maSach);
+      let nameBook = prompt("Nhập tên sách: ");
+      let orderNumber = +prompt("Nhập số thứ tự của sách");
+      nameBook = nameBook.trim().toUpperCase();
       
+
 
     </script>
 </body>

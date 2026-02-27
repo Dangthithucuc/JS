@@ -7,18 +7,15 @@
 </head>
 <body>
     <script>
-       let name = prompt("Nhập tên 1 quyển sách");
-       let tenGoc = name;
-       let tenThuong = name.toLowerCase();
-       let tenHoa = name.toUpperCase();
-       console.log(
-        "Tên gốc " + tenGoc  );
-       
+     let nameBook = prompt("Nhập tên sách: ");
+     let oldname = nameBook;
+     let nameUpperCase = nameBook.toUpperCase();
+     let nameLowerCase = nameBook.toLowerCase();
+     console.log(`
+    Tên gốc: ${oldname}
+    Tên viết thường: ${nameLowerCase}
+    Tên viết hoa: ${nameUpperCase}`);
      
-        
-      
-       console.log( "Tên viết thường  " + tenThuong );
-       console.log(   "Tên viết hoa  " + tenHoa)
     </script>
 </body>
 </html>

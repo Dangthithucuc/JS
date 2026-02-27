@@ -7,12 +7,16 @@
 </head>
 <body>
     <script>
-       let a = prompt("Nhập tên sách");
-       let b = +prompt("Nhập năm xuất bản của sách");
-       let bookAge = 2026 - b;
-       console.log("Sách: " + a);
-       console.log("Năm xuất bản: " + b);
-       console.log("Tuổi của sách: " + bookAge);
+     let nameBook = prompt("Nhập tên sách");
+     let publishYear = +prompt("Nhập năm xuất bản của sách: ");
+     let currentYear = +prompt("Nhập năm hiện tại: ");
+     let bookAge = currentYear - publishYear;
+     console.log(`
+     Sách : ${nameBook}
+     Năm xuất bản : ${publishYear}
+     Tuổi của sách: ${bookAge}
+     `);
+      
 
     </script>
 </body>

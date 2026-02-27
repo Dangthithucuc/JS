@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let squad = [
+
+    { id: 1, name: "Nguyen Van A", goals: 10, position: "FW" },
+
+    { id: 2, name: "Tran Van B", goals: 5,  position: "MF" },
+
+    { id: 3, name: "Le Van C",   goals: 0,  position: "DF" },
+
+    { id: 4, name: "Pham Van D", goals: 12, position: "FW" },
+
+    { id: 5, name: "Dang Van E", goals: 0,  position: "GK" }
+
+];
+let choice;
+  do {
+     choice = +prompt(`
+    --- FOOTBALL MANAGER PRO ---
+    1.Sanh sách đội bóng
+    2.Thêm cầu thủ mới
+    3.Tìm cầu thủ theo ID
+    4.Câp nhập thành tích
+    5.Chuyển nhượng cầu thủ
+    0.Thoát chương trình
+ 
+    `)
+    switch (choice) {
+        case 1:
+            let list = squad.forEach(player => {
+                console.log(`Mã ${player.id} - ${player.name} (${player.goals}) `);
+                
+            })
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 0:
+            alert("Chương trình kết thúc")
+            
+            break;
+        
+    }
+  } while (choice != "0" )
+    
+    
+    
+    
+   
+ 
+    </script>
+</body>
+</html>

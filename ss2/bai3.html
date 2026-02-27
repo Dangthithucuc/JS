@@ -7,17 +7,20 @@
 </head>
 <body>
     <script>
-        let bookName = prompt("Nhập tên sách: ");
-        let genreBook = prompt("Nhập thể loại sách:(Khoa học hay lịch sử) ");
-        let statusBook = prompt("tình trạng sách :Có sẵn hay đang mượn");
-        if ( genreBook =="Khoa học" ||  genreBook == "lịch sử") {
-            if ( statusBook == "Có sẵn") {
+        let nameBook = prompt("Nhập tên sách: ").toLowerCase();
+        let category = prompt("Nhập thể loại sách:(khoa học,lịch sử,văn học,truyện)").toLowerCase();
+        let status = prompt("Tình trạng sách (có sẵn /đã mượn)");
+        if (category === "khoa học" || category === "lịch sử") {
+            if (status === "có sẵn") {
                 console.log("Sách này có sẵn trong thư viện");
-            } else {
+                
+            } else if (status === "đã mượn") {
                 console.log("Sách đã được mượn");
+                
             }
-        } else if (genreBook =="Văn học" ||  genreBook == "Truyện") {
-        console.log("Sách này có thể đọc giải trí")
+        } else if (category === "văn học" || category === "truyện") {
+            console.log("Sách này có thể đọc giải trí");
+            
         }
 
     </script>

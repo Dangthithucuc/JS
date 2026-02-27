@@ -6,34 +6,33 @@
 </head>
 <body>
 <script>
-  
-  let bookName = prompt("Nhập tên sách:");
-  let borrowerName = prompt("Nhập tên người mượn:");
-  let bookStatus = prompt("Nhập tình trạng sách (available / borrowed / unavailable):");
-  let daysBorrow = +prompt("Nhập số ngày mượn:");
-  let hasCard = prompt("Bạn có thẻ thư viện không? (yes/no):");
+    let bookName = prompt("Nhập tên sách: ");
+    let borrower = prompt("Nhập tên người mượn: ");
+    let status = prompt("Tình trạng sách (có sẵn / đã mượn / không có sẵn): ").toLowerCase();
+    let daysBorrowed = +prompt("Số ngày mượn: ");
+    let hasCard = prompt("Bạn có thẻ thư viện không? (có/không)").toLowerCase();
+    if ( status === "có sẵn" && hasCard === "có") {
+      console.log("Chúc mừng,bạn có thể mượn sách này");
+      
+    }  else if (status === "đã mượn" && daysBorrowed < 30 ) {
+       if (hasCard === "có") {
+        console.log("Sách đang được mượn, vui lòng đợi đến khi trả lại");
 
-  
-  let libraryCard = (hasCard === "yes");
+        
+       } else if (hasCard === "không") {
+        console.log("Bạn không thể mượn sách nếu không có thẻ thư viện");
 
-  
-  if (bookStatus === "available" && libraryCard) {
-    console.log("Chúc mừng, bạn có thể mượn sách này");
+        
+       }
 
-  } else if (bookStatus === "borrowed" && daysBorrow < 30) {
-
-    if (libraryCard) {
-      console.log("Sách đang được mượn, vui lòng đợi đến khi trả lại");
-    } else {
-      console.log("Bạn không thể mượn sách nếu không có thẻ thư viện");
+    } else if (status === "đã mượn") {
+      console.log("Sách này hiện tại không có sẵn trong thư viện, bạn có thể đăng ký mượn sau");
+      
+    } else if (status !== "đã mượn" && status !== "có sẵn"  ) {
+      console.log("Thông tin không hợp lệ, vui lòng nhập lại.");
+      
     }
-
-  } else if (bookStatus === "unavailable") {
-    console.log("Sách này hiện tại không có sẵn trong thư viện, bạn có thể đăng ký mượn sau");
-
-  } else {
-    console.log("Thông tin không hợp lệ, vui lòng nhập lại");
-  }
+ 
 </script>
 </body>
 </html>
