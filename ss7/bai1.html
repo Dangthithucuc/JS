@@ -7,60 +7,70 @@
 </head>
 <body>
     <script>
-   
-    let playerIds = [];
-    let playerPositions = [];
-    let positions = ["Thủ môn", "Hậu vệ", "Tiền vệ", "Tiền đạo"];
-    let n = +prompt("Có bao nhiêu cầu thủ cần nhập vào đội bóng?");
-    for (let i = 0; i < n; i++) {
-        console.log(`Nhập cầu thủ ${i + 1}:`);
-        let id;
-        while (true) {
-            id = prompt("Mã cầu thủ:");
-            if (!playerIds.includes(id)) {
-                break;
+        let playerIds = [] ;
+        let playerPositions = [] ;
+        let n;
+        do {
+            n = parseInt(prompt("Có bao nhiêu cầu thủ cần nhập vào đội bóng?(số nguyên dương)"))
+        } while (isNaN(n) || n <= 0)
+        for (let i = 0; i < n; i++) {
+            alert(`Nhập cầu thủ ${ i + 1}`) ;
+            let id;
+            let isDuplicate = false;
+            
+            do {
+                id  = prompt("Mã cầu thủ");
+                for (let j = 0; j < playerIds.length; j++) {
+                if (playerIds[j]  === id) {
+                    alert("Mã đã tồn tại! Nhập lại.");
+                    isDuplicate = true;
+                    break;
+                }
             }
-            alert("Mã cầu thủ đã tồn tại, vui lòng nhập lại!");
-        }
-        playerIds.push(id);
+            } while (!id || isDuplicate);
+            playerIds.push(id);
+            let player; 
+            let result;
+            do {
+                player = +prompt("1:Thủ môn 2:Hậu vệ 3:Tiền vệ 4:Tiền đạo");
+                switch(player) {
+                    case 1: result = "Thủ môn"
+                    break;
+                    case 2: result = "Hậu vệ"
+                    break;
 
-      
-        let pos;
-        while (true) {
-            pos = +prompt(
-                "Vị trí (1: Thủ môn 2: Hậu vệ 3: Tiền vệ 4: Tiền đạo):"
-            );
-            if (pos >= 1 && pos <= 4) {
-                break;
-            }
-            alert("Vị trí không hợp lệ, nhập lại!");
+                    case 3: result = "Tiền vệ"
+                    break;
+                    case 4: result = "Tiền đạo"
+                    break;
+
+                    default: 
+                    alert("Lựa chọn không hợp lệ");
+                    result = null;
+
+                    
+                } 
+               
+            }while (!result);
+             playerPositions.push(result);
         }
-        playerPositions.push(positions[pos - 1]);
-    }
     function printTeamRoster() {
-        console.log(`Đội bóng hiện tại (${playerIds.length} cầu thủ):`);
-        for (let i = 0; i < playerIds.length; i++) {
-            console.log(`${i + 1}. ${playerIds[i]} - ${playerPositions[i]}`);
-        }
+      console.log(`Đội bóng hiện tại(${n} cầu thủ)`);
+      for( let i = 0; i < n; i++) {
+        console.log(`
+        ${i + 1}. ${playerIds[i]} - ${playerPositions[i]}
+        `);
+            
+        
+        
+      }
+      
+      
+     
+      
     }
-    function findPlayersByPosition(position) {
-        let indexes = [];
-        for (let i = 0; i < playerPositions.length; i++) {
-            if (playerPositions[i] === position) {
-                indexes.push(i);
-            }
-        }
-        return indexes;
-    }
-    let searchPos = +prompt(
-        "Nhập vị trí cầu thủ muốn đếm số lượng (1: Thủ môn, 2: Hậu vệ, 3: Tiền vệ, 4: Tiền đạo):"
-    );
-
-    let positionName = positions[searchPos - 1];
-    let result = findPlayersByPosition(positionName);
     printTeamRoster();
-    console.log(`Số cầu thủ ở vị trí ${positionName}: ${result.length}`);
-    console.log(`Các chỉ số cầu thủ ở vị trí ${positionName}: ${result.join(", ")}`);
-</script>
+
+    </script>
 </body>
 </html>
