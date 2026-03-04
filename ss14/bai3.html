@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <h1>Danh Sách Sản Phẩm Chợ Tết</h1>
+    <ul id = "product-list"></ul>
+    <form id ="product-form">
+    <input type="text" id="product-name" placeholder="Tên sản phẩm">
+    <input type="number" id="product-price" placeholder="Giá (VND)">
+    <button type="submit">Thêm Sản Phẩm</button>
+    <script>
+        const products = [
+    { id: 1, name: "Bánh Chưng", price: 150000 },
+    { id: 2, name: "Giò Lụa", price: 180000 }
+];
+
+const productList = document.getElementById("product-list");
+const form = document.getElementById("product-form");
+const nameInput = document.getElementById("product-name");
+const priceInput = document.getElementById("product-price");
+
+
+
+function renderProducts() {
+    productList.innerHTML = "";
+
+    products.forEach(product => {
+        const li = document.createElement("li");
+        li.className = "product-item";
+        li.setAttribute("data-id", product.id);
+
+        li.innerHTML = `
+            <strong>${product.name}</strong> - 
+            ${product.price.toLocaleString()} VND
+            <button class="delete-btn">Xóa</button>
+        `;
+
+        productList.appendChild(li);
+    });
+}
+
+renderProducts();
+
+
+
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = nameInput.value.trim();
+    const price = +priceInput.value;
+
+    if (!name || !price) {
+        alert("Vui lòng nhập đầy đủ!");
+        return;
+    }
+
+    const newProduct = {
+        id: products.length + 1,
+        name,
+        price
+    };
+
+    products.push(newProduct);
+    renderProducts();
+
+    nameInput.value = "";
+    priceInput.value = "";
+});
+
+
+
+productList.addEventListener("click", function (e) {
+
+    
+    if (e.target.classList.contains("delete-btn")) {
+
+        const confirmDelete = confirm("Bạn có chắc muốn xóa sản phẩm này?");
+
+        if (confirmDelete) {
+
+          
+            const li = e.target.closest("li");
+            const id = +li.getAttribute("data-id");
+
+            
+            const index = products.findIndex(p => p.id === id);
+            products.splice(index, 1);
+
+          
+            renderProducts();
+        }
+    }
+});
+    </script>
+</body>
+</html>
