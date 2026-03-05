@@ -1,31 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Project Session 11</title>
 </head>
 <body>
-    <script>
-       let result = incre([1,2,3,4]);
-       let result2 = incre([-1,-2,-3,-4])();
-        function incre(arr) {
-            for ( let index in arr ) {
-                arr[index] = arr[index] + 10;
+<h1 style="text-align:center;">Mini Project Session 11</h1>
 
-            }
-            return function() {
-                for(let index in arr) {
-                    arr[index] = arr[index] **2;
-                }
-                 return arr;
-            };
-           
-        }
-        console.log(result);
-        console.log(result2);
-        
-        
-    </script>
+<script>
+
+let students = [
+  { id: 1, name: "Nguyen Van An", age: 20, gpa: 8.5, status: "active" },
+  { id: 2, name: "Tran Thi Bich", age: 17, gpa: 7.2, status: "active" },
+  { id: 3, name: "Le Hoang Cuong", age: 22, gpa: 9.1, status: "inactive" },
+  { id: 4, name: "Pham Thi Dung", age: 19, gpa: 6.8, status: "active" }
+];
+
+let nextId = 5;
+let running = true;
+
+do {
+
+let choice = prompt(
+`===== STUDENT MANAGEMENT SYSTEM =====
+1. Create Student
+2. Read All Students
+3. Filter Scholarship Candidates
+4. Update Student Profile
+5. Delete Record
+6. Compliance Verification
+7. Academic Statistics
+8. Data Normalization
+0. Exit
+Enter your choice`
+);
+
+switch(choice){
+
+case "1":
+
+let name = prompt("Enter student name:");
+if(!name || name.trim() === ""){
+alert("Name cannot be empty");
+break;
+}
+
+let age = parseInt(prompt("Enter age:"));
+if(isNaN(age) || age <= 0){
+alert("Invalid age");
+break;
+}
+
+let gpa = parseFloat(prompt("Enter GPA (0-10):"));
+if(isNaN(gpa) || gpa < 0 || gpa > 10){
+alert("Invalid GPA");
+break;
+}
+
+let status = prompt("Enter status (active/inactive)").trim().toLowerCase();
+if(status !== "active" && status !== "inactive"){
+alert("Invalid status");
+break;
+}
+
+let newStudent = {
+id: nextId++,
+name: name.trim(),
+age: age,
+gpa: gpa,
+status: status
+};
+
+students.push(newStudent);
+
+alert(`Student created:
+ID: ${newStudent.id}
+Name: ${newStudent.name}
+Age: ${newStudent.age}
+GPA: ${newStudent.gpa}
+Status: ${newStudent.status}`);
+
+break;
+
+
+case "2":
+
+let list = "===== ALL STUDENTS =====\n";
+for(let i = 0; i < students.length; i++){
+list += `ID:${students[i].id} | Name:${students[i].name} | Age:${students[i].age} | GPA:${students[i].gpa} | Status:${students[i].status}\n`;
+}
+alert(list);
+
+break;
+
+
+case "3":
+
+let result = "Scholarship Candidates (GPA > 8)\n";
+
+let found = false;
+
+for(let i = 0; i < students.length; i++){
+if(students[i].gpa > 8){
+found = true;
+result += `${students[i].name} - GPA: ${students[i].gpa}\n`;
+}
+}
+
+if(!found){
+result += "No students found";
+}
+
+alert(result);
+
+break;
+
+
+case "4":
+
+let updateId = parseInt(prompt("Enter student ID to update"));
+
+let student = students.find(s => s.id === updateId);
+
+if(!student){
+alert("Student not found");
+break;
+}
+
+let newName = prompt(`New name (${student.name})`);
+if(newName && newName.trim() !== ""){
+student.name = newName.trim();
+}
+
+let newGpa = prompt(`New GPA (${student.gpa})`);
+if(newGpa && newGpa.trim() !== ""){
+let parsed = parseFloat(newGpa);
+if(!isNaN(parsed) && parsed >=0 && parsed <=10){
+student.gpa = parsed;
+}
+}
+
+alert(`Updated:
+ID:${student.id}
+Name:${student.name}
+GPA:${student.gpa}`);
+
+break;
+
+
+case "5":
+
+let deleteId = parseInt(prompt("Enter student ID to delete"));
+
+let index = students.findIndex(s => s.id === deleteId);
+
+if(index === -1){
+alert("Student not found");
+break;
+}
+
+let confirmDelete = prompt(`Delete ${students[index].name}? type YES`);
+
+if(confirmDelete && confirmDelete.toLowerCase() === "yes"){
+students.splice(index,1);
+alert("Deleted successfully");
+}else{
+alert("Cancelled");
+}
+
+break;
+
+
+case "6":
+
+let hasMinor = false;
+let allActive = true;
+let text = "";
+
+for(let i =0;i<students.length;i++){
+
+if(students[i].age < 18){
+hasMinor = true;
+}
+
+if(students[i].status !== "active"){
+allActive = false;
+}
+
+}
+
+text += `Has student under 18: ${hasMinor}\n`;
+text += `All students active: ${allActive}`;
+
+alert(text);
+
+break;
+
+
+case "7":
+
+if(students.length === 0){
+alert("No students");
+break;
+}
+
+let total = 0;
+let highest = students[0];
+let lowest = students[0];
+
+for(let i=0;i<students.length;i++){
+
+total += students[i].gpa;
+
+if(students[i].gpa > highest.gpa){
+highest = students[i];
+}
+
+if(students[i].gpa < lowest.gpa){
+lowest = students[i];
+}
+
+}
+
+let avg = total / students.length;
+
+alert(`Total students: ${students.length}
+Average GPA: ${avg.toFixed(2)}
+Highest GPA: ${highest.name} (${highest.gpa})
+Lowest GPA: ${lowest.name} (${lowest.gpa})`);
+
+break;
+
+
+case "8":
+
+let normalized = [];
+
+for(let i=0;i<students.length;i++){
+
+let obj = {
+id: students[i].id,
+name: students[i].name.toUpperCase(),
+age: students[i].age,
+gpa: students[i].gpa,
+status: students[i].status
+};
+
+normalized.push(obj);
+
+}
+
+let show = "Normalized Data\n";
+
+for(let i=0;i<normalized.length;i++){
+show += `${normalized[i].name} - GPA ${normalized[i].gpa}\n`;
+}
+
+alert(show);
+
+console.log(normalized);
+
+break;
+
+
+case "0":
+running = false;
+alert("Goodbye");
+break;
+
+case null:
+running = false;
+break;
+
+default:
+alert("Invalid choice");
+
+}
+
+}while(running);
+
+</script>
+
 </body>
 </html>
