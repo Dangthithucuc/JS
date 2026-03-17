@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo Tết</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f5f5;
+    }
+
+    .container {
+      width: 400px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      background: #d32f2f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .todo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px;
+      padding: 12px;
+      background: #f3e5c3;
+      border-left: 5px solid orange;
+      border-radius: 8px;
+    }
+
+    .status {
+      color: gray;
+      font-size: 14px;
+    }
+
+    .done {
+      color: green;
+      font-weight: bold;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h2>Chuẩn bị Tết Nguyên Đán</h2>
+    <p>Danh sách việc cần làm</p>
+  </div>
+
+  <div id="todoList"></div>
+
+  <div class="footer">
+    Đã lưu vào localStorage lần đầu tiên • Refresh trang để kiểm tra
+  </div>
+</div>
+
+<script>
+const defaultTodos = [
+  { id: 1, task: "Mua bánh chưng", done: false },
+  { id: 2, task: "Dọn nhà đón Tết", done: false },
+  { id: 3, task: "Gói bánh chưng", done: false },
+  { id: 4, task: "Trang trí nhà cửa", done: false }
+];
+
+let todos = [];
+
+const list = document.getElementById("todoList");
+
+
+function loadTodos() {
+  let data = localStorage.getItem("myTodos");
+
+  if (!data) {
+    localStorage.setItem("myTodos", JSON.stringify(defaultTodos));
+    todos = defaultTodos;
+  } else {
+    todos = JSON.parse(data);
+  }
+
+  renderTodos();
+}
+
+
+function renderTodos() {
+  list.innerHTML = "";
+
+  todos.forEach(todo => {
+    let div = document.createElement("div");
+    div.className = "todo";
+
+    div.innerHTML = `
+      <span>🌸 ${todo.task}</span>
+      <span class="status ${todo.done ? "done" : ""}">
+        ${todo.done ? "Đã làm" : "Chưa làm"}
+      </span>
+    `;
+
+    list.appendChild(div);
+  });
+}
+
+
+loadTodos();
+</script>
+
+</body>
+</html>

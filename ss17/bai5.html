@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo Tết</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f5f5;
+    }
+
+    .container {
+      width: 420px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .header {
+      background: #d32f2f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .add-box {
+      display: flex;
+      gap: 10px;
+      padding: 15px;
+    }
+
+    input {
+      flex: 1;
+      padding: 8px;
+    }
+
+    button {
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .todo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px;
+      padding: 12px;
+      background: #f3e5c3;
+      border-left: 5px solid orange;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .left {
+      flex: 1;
+    }
+
+    .done-task {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    .actions button {
+      margin-left: 5px;
+      background: none;
+      border: none;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h2>Chuẩn bị Tết Nguyên Đán</h2>
+    <p>Danh sách việc cần làm</p>
+  </div>
+
+  <div class="add-box">
+    <input type="text" id="taskInput" placeholder="Nhập công việc mới...">
+    <button onclick="addTodo()">Thêm</button>
+  </div>
+
+  <div id="todoList"></div>
+</div>
+
+<script>
+const initialTodos = [
+  { id: 1, task: "Mua bánh chưng", done: false },
+  { id: 2, task: "Dọn nhà đón Tết", done: false },
+  { id: 3, task: "Gói bánh chưng", done: false },
+  { id: 4, task: "Trang trí nhà cửa", done: false }
+];
+
+let todos = [];
+const list = document.getElementById("todoList");
+const input = document.getElementById("taskInput");
+
+
+function loadTodos() {
+  let data = localStorage.getItem("myTodos");
+
+  if (data) {
+    todos = JSON.parse(data);
+  } else {
+    todos = initialTodos;
+    localStorage.setItem("myTodos", JSON.stringify(todos));
+  }
+
+  renderTodos();
+}
+
+
+function renderTodos() {
+  list.innerHTML = "";
+
+  todos.forEach(todo => {
+    let div = document.createElement("div");
+    div.className = "todo";
+
+    div.innerHTML = `
+      <div class="left ${todo.done ? "done-task" : ""}">
+        🌸 ${todo.task}
+      </div>
+
+      <div class="actions">
+        <button class="edit-btn">✏️</button>
+        <button class="delete-btn">🗑️</button>
+      </div>
+    `;
+
+    
+    div.onclick = () => toggleTodo(todo.id);
+
+   
+    div.querySelector(".edit-btn").onclick = (e) => {
+      e.stopPropagation();
+      startEdit(todo.id, div);
+    };
+
+   
+    div.querySelector(".delete-btn").onclick = (e) => {
+      e.stopPropagation();
+      deleteTodo(todo.id);
+    };
+
+    list.appendChild(div);
+  });
+}
+
+
+function toggleTodo(id) {
+  todos = todos.map(t =>
+    t.id === id ? { ...t, done: !t.done } : t
+  );
+
+  saveAndRender();
+}
+
+
+function addTodo() {
+  let value = input.value.trim();
+
+  if (!value) {
+    alert("Không được để trống!");
+    return;
+  }
+
+  todos.push({
+    id: Date.now(),
+    task: value,
+    done: false
+  });
+
+  input.value = "";
+  saveAndRender();
+}
+
+
+function deleteTodo(id) {
+  if (!confirm("Bạn có chắc muốn xóa không?")) return;
+
+  todos = todos.filter(t => t.id !== id);
+  saveAndRender();
+}
+
+
+function startEdit(id, div) {
+  let todo = todos.find(t => t.id === id);
+
+  let leftDiv = div.querySelector(".left");
+
+  
+  let inputEdit = document.createElement("input");
+  inputEdit.type = "text";
+  inputEdit.value = todo.task;
+
+  leftDiv.innerHTML = "";
+  leftDiv.appendChild(inputEdit);
+
+  inputEdit.focus();
+  inputEdit.select();
+
+  
+  inputEdit.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      let newValue = inputEdit.value.trim();
+
+      if (!newValue) {
+        alert("Không được để trống!");
+        return;
+      }
+
+      todo.task = newValue;
+      saveAndRender();
+    }
+
+   
+    if (e.key === "Escape") {
+      renderTodos();
+    }
+  });
+}
+
+
+function saveAndRender() {
+  localStorage.setItem("myTodos", JSON.stringify(todos));
+  renderTodos();
+}
+
+
+input.addEventListener("keypress", function(e) {
+  if (e.key === "Enter") addTodo();
+});
+
+loadTodos();
+</script>
+
+</body>
+</html>
